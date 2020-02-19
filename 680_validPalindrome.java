@@ -6,12 +6,12 @@ public class scratch
 {
     public static void main(String[] args)
     {
-        String input="abca";
-        char canDelete='c';
-        System.out.println(validPalindrome(input,canDelete));
+        String input="aba";
+
+        System.out.println(validPalindrome(input));
     }
 
-    public static boolean validPalindrome(String input,char delete)
+    public static boolean validPalindrome(String input)
     {
         int point1=0;
         int point2=input.length()-1;
@@ -21,15 +21,25 @@ public class scratch
             {
                 point1++;
                 point2--;
-            }else if(input.charAt(point1)!=input.charAt(point2)&&(input.charAt(point1)==delete))
-            {
-                point1++;
-            }
-            else if(input.charAt(point1)!=input.charAt(point2)&&(input.charAt(point2)==delete))
-            {
-                point2--;
             }
             else if (input.charAt(point1)!=input.charAt(point2))
+            {
+                return validPalindromeHelper(input,point1,point2-1)||validPalindromeHelper(input,point1+1,point2);
+            }
+        }
+        return true;
+    }
+
+    public static boolean validPalindromeHelper(String input,int start,int end)
+    {
+        while(start<=end)
+        {
+            if(input.charAt(start)==input.charAt(end))
+            {
+                start++;
+                end--;
+            }
+            else
             {
                 return false;
             }
